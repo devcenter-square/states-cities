@@ -3,7 +3,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.pyc
-
 # C extensions
 *.so
 
@@ -46,7 +45,6 @@ nosetests.xml
 coverage.xml
 *,cover
 .hypothesis/
-
 # Translations
 *.mo
 *.pot
