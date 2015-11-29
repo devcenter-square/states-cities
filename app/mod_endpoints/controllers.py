@@ -19,7 +19,7 @@ def get_lgas(state_name):
     lgas = LocalGovernmentArea.get_all_lgas_with_state_name(state_name)
     return Response(dumps(lgas), mimetype='application/json')
 
-@mod_endpoints.route('/state', methods=['GET'])
+@mod_endpoints.route('/<state_name>', methods=['GET'])
 def get_state(state_name):
     state = State.get_one_state(state_name)
     return Response(dumps(state), mimetype='application/json')
