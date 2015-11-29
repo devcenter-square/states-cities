@@ -38,3 +38,12 @@ class LocalGovernmentArea(Object):
         result_set.append(LGA.as_dict())
     return result_set
 
+  @staticmethod
+  def get_all_lgas_with_state_code(code):
+    result_set = []
+    state = State.Query.get(state_code = code).limit(1)
+    lgas = LocalGovernmentArea.Query.get(state = state.objectId)
+    for LGA in lgas:
+        result_set.append(LGA.as_dict())
+    return result_set
+
