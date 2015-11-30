@@ -21,10 +21,14 @@ def get_lgas(state_name):
 
 
 @mod_endpoints.route('/<state_code>/lgas', methods=['GET'])
-def get_lgas(state_name):
+def get_lgas(state_code):
     lgas = LocalGovernmentArea.get_all_lgas_with_state_code(state_code)
     return Response(dumps(lgas), mimetype='application/json')
 
+@mod_endpoints.route('/<state_code>', methods=['GET'])
+def get_state(state_code):
+    state = State.get_one_state(state_code)
+    return Response(dumps(state), mimetype='application/json')
 
 
 
