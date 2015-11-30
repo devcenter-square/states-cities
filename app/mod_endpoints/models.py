@@ -25,9 +25,9 @@ class State(Object):
     @staticmethod
     def get_one_state(state_name):
         result_set = []
-        state = State.Query.get(name=state_name).limit(1)
+        state = State.Query.get(name=state_name)
         result_set.append(state.as_dict())
-        return result_set
+        return state.as_dict()
 
     @staticmethod
     def get_one_state_with_state_code(code):
