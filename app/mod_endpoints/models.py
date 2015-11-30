@@ -59,3 +59,22 @@ class LGA(Object):
         for lga in lgas:
             result_set.append(lga.as_dict())
         return result_set
+
+    @staticmethod
+    def get_all_cities_with_state_name(state_name):
+        result_set = []
+        state_result = State.Query.get(name=state_name)
+        print state_result.objectId
+        lgas = LGA.Query.filter(state=state_result, city=True)
+        for lga in lgas:
+            result_set.append(lga.as_dict())
+        return result_set
+
+    @staticmethod
+    def get_all_cities_with_state_code(code):
+        result_set = []
+        state_result = State.Query.get(state_code = code)
+        lgas = LGA.Query.filter(state=state_result, city=True)
+        for lga in lgas:
+            result_set.append(lga.as_dict())
+        return result_set
