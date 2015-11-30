@@ -22,11 +22,9 @@ class State(Object):
         return result_set
 
     @staticmethod
-    def get_one_state(code):
-        result_set = []
-        state = State.Query.get(state_code=code).limit(1)
-        result_set.append(state.as_dict())
-        return result_set
+    def get_one_state_with_state_code(code):
+        state = State.Query.get(state_code=code)
+        return state.as_dict()
 
 
 class LocalGovernmentArea(Object):
