@@ -14,32 +14,17 @@ def get_states():
     states = State.get_all_states()
     return Response(dumps(states), mimetype='application/json')
 
-@mod_endpoints.route('/state_with_code/<state_code>', methods=['GET'])
-def get_state_with_state_code(state_code):
-    state = State.get_one_state_with_state_code(state_code.upper())
+@mod_endpoints.route('/state/<state_name_or_code>', methods=['GET'])
+def get_state(state_name_or_code):
+    state = State.get_one_state(state_name_or_code)
     return Response(dumps(state), mimetype='application/json')
 
-@mod_endpoints.route('/state_with_name/<state_name>', methods=['GET'])
-def get_state(state_name):
-    state = State.get_one_state(state_name.capitalize())
-    return Response(dumps(state), mimetype='application/json')
-
-@mod_endpoints.route('/lgas_with_state_name/<state_name>/', methods=['GET'])
-def get_lgas(state_name):
-    lgas = LGA.get_all_lgas_with_state_name(state_name.capitalize())
+@mod_endpoints.route('/state/<state_name_or_code>/lgas', methods=['GET'])
+def get_lgas(state_name_or_code):
+    lgas = LGA.get_all_lgas(state_name_or_code)
     return Response(dumps(lgas), mimetype='application/json')
 
-@mod_endpoints.route('/lgas_with_state_code/<state_code>/', methods=['GET'])
-def get_lgas_with_state_code(state_code):
-    lgas = LGA.get_all_lgas_with_state_code(state_code.upper())
-    return Response(dumps(lgas), mimetype='application/json')
-
-@mod_endpoints.route('/cities_with_state_name/<state_name>/', methods=['GET'])
-def get_cities(state_name):
-    lgas = LGA.get_all_cities_with_state_name(state_name.capitalize())
-    return Response(dumps(lgas), mimetype='application/json')
-
-@mod_endpoints.route('/cities_with_state_code/<state_code>/', methods=['GET'])
-def get_cities_with_state_code(state_code):
-    lgas = LGA.get_all_cities_with_state_code(state_code.upper())
-    return Response(dumps(lgas), mimetype='application/json')
+@mod_endpoints.route('/state/<state_name_or_code>/cities', methods=['GET'])
+def get_cities(state_name_or_code):
+    cities = LGA.get_all_cities(state_name_or_code)
+    return Response(dumps(cities), mimetype='application/json')

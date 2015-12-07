@@ -23,16 +23,17 @@ class State(Object):
         return result_set
 
     @staticmethod
-    def get_one_state(state_name):
-        result_set = []
-        state = State.Query.get(name=state_name)
-        result_set.append(state.as_dict())
-        return state.as_dict()
+    def get_one_state(state_name_or_code):
+        if state_name_or_code.len == 2:
+            code = state_name_or_code.upper()
+            state = State.Query.get(state_code=code)
+            return state.as_dict()
+        elif state_name_or_code.len > 2:
+            state_name = state_name_or_code.capitalize()
+            state = State.Query.get(name=state_name)
+            return state.as_dict()
 
-    @staticmethod
-    def get_one_state_with_state_code(code):
-        state = State.Query.get(state_code=code)
-        return state.as_dict()
+
 
 
 class LGA(Object):
@@ -52,29 +53,39 @@ class LGA(Object):
         return result_set
 
     @staticmethod
-    def get_all_lgas_with_state_code(code):
-        result_set = []
-        state_result = State.Query.get(state_code=code)
-        lgas = LGA.Query.filter(state=state_result)
-        for lga in lgas:
-            result_set.append(lga.as_dict())
-        return result_set
+    def get_all_lgas(state_name_or_code):
+        if len(state_name_or_code) == 2:
+            code = state_name_or_code.upper()
+            result_set = []
+            state_result = State.Query.get(state_code=code)
+            lgas = LGA.Query.filter(state=state_result)
+            for lga in lgas:
+                result_set.append(lga.as_dict())
+            return result_set
+        elif len(state_name_or_code) > 2:
+            state_name = state_name_or_code.capitalize()
+            result_set = []
+            state_result = State.Query.get(name=state_name)
+            lgas = LGA.Query.filter(state=state_result)
+            for lga in lgas:
+                result_set.append(lga.as_dict())
+            return result_set
 
     @staticmethod
-    def get_all_cities_with_state_name(state_name):
-        result_set = []
-        state_result = State.Query.get(name=state_name)
-        print state_result.objectId
-        lgas = LGA.Query.filter(state=state_result, city=True)
-        for lga in lgas:
-            result_set.append(lga.as_dict())
-        return result_set
-
-    @staticmethod
-    def get_all_cities_with_state_code(code):
-        result_set = []
-        state_result = State.Query.get(state_code = code)
-        lgas = LGA.Query.filter(state=state_result, city=True)
-        for lga in lgas:
-            result_set.append(lga.as_dict())
-        return result_set
+    def get_all_cities(state_name_or_code):
+        if len(state_name_or_code) == 2:
+            code = state_name_or_code.upper()
+            result_set = []
+            state_result = State.Query.get(state_code=code)
+            lgas = LGA.Query.filter(state=state_result, city=True)
+            for lga in lgas:
+                result_set.append(lga.as_dict())
+            return result_set
+        elif len(state_name_or_code) > 2:
+            state_name = state_name_or_code.capitalize()
+            result_set = []
+            state_result = State.Query.get(name=state_name)
+            lgas = LGA.Query.filter(state=state_result, city=True)
+            for lga in lgas:
+                result_set.append(lga.as_dict())
+            return result_set
