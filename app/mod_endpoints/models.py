@@ -24,11 +24,11 @@ class State(Object):
 
     @staticmethod
     def get_one_state(state_name_or_code):
-        if state_name_or_code.len == 2:
+        if len(state_name_or_code) == 2:
             code = state_name_or_code.upper()
             state = State.Query.get(state_code=code)
             return state.as_dict()
-        elif state_name_or_code.len > 2:
+        elif len(state_name_or_code) > 2:
             state_name = state_name_or_code.capitalize()
             state = State.Query.get(name=state_name)
             return state.as_dict()
