@@ -1,46 +1,52 @@
 from parse_rest.datatypes import Object
 
-
 class State(Object):
     def as_dict(self):
-        state = {}
-        state['name'] = self.name
-        state['capital'] = self.cap_city
-        state['latitude'] = self.latitude
-        state['longitude'] = self.longitude
-        state['min-lat'] = self.min_latitude
-        state['min-long'] = self.min_longitude
-        state['max-lat'] = self.max_latitude
-        state['max-long'] = self.max_longitude
+        return {
+            'name': self.name,
+            'capital': self.cap_city,
+            'latitude': self.latitude,
+            'longitude': self.longitude,
+            'min-lat': self.min_latitude,
+            'min-long': self.min_longitude,
+            'max-lat': self.max_latitude,
+            'max-long': self.max_longitude
+        }
+
+
+    @classmethod
+    def find_by_name_or_code(cls,state_name_or_code):
+        """
+            While this is good. This doesnt make it easy for code maintenance.
+            We could rather break this down into find_by_name and a find_by_code method that.
+            This would mean breaking changes to the api as it would mean searches can be done using either name
+            or state_code. This would mean our api is more consistent.
+        """
+        if len(state_name_or_code) == 2:
+            state = State.Query.get(state_code=state_name_or_code.upper())
+        elif len(state_name_or_code) > 2:
+            state = State.Query.get(name=state_name_or_code.title())
         return state
 
     @staticmethod
     def get_all_states():
-        result_set = []
-        states = State.Query.all()
-        for state in states:
-            result_set.append(state.as_dict())
-        return result_set
+        return [ state.as_dict() for state in State.Query.all() ]
 
     @staticmethod
     def get_one_state(state_name_or_code):
-        if len(state_name_or_code) == 2:
-            code = state_name_or_code.upper()
-            state = State.Query.get(state_code=code)
-            return state.as_dict()
-        elif len(state_name_or_code) > 2:
-            state_name = state_name_or_code.title()
-            state = State.Query.get(name=state_name)
-            return state.as_dict()
-
-
-
+        _state_ = State.find_by_name_or_code(state_name_or_code)
+        return _state_.as_dict()
 
 class LGA(Object):
     def as_dict(self):
-        lga = {}
-        lga["name"] = self.name
-        return lga
+        return {
+            'name': self.name
+        }
+
+    @classmethod
+    def find_state_cities(cls,state_name_or_code):
+        _state_ = State.find_by_name_or_code(state_name_or_code)
+        return [ lga.as_dict() for lga in LGA.Query.filter( state=_state_, city=True ) ]
 
     @staticmethod
     def get_all_lgas_with_state_name(state_name):
@@ -54,38 +60,9 @@ class LGA(Object):
 
     @staticmethod
     def get_all_lgas(state_name_or_code):
-        if len(state_name_or_code) == 2:
-            code = state_name_or_code.upper()
-            result_set = []
-            state_result = State.Query.get(state_code=code)
-            lgas = LGA.Query.filter(state=state_result)
-            for lga in lgas:
-                result_set.append(lga.as_dict())
-            return result_set
-        elif len(state_name_or_code) > 2:
-            state_name = state_name_or_code.capitalize()
-            result_set = []
-            state_result = State.Query.get(name=state_name)
-            lgas = LGA.Query.filter(state=state_result)
-            for lga in lgas:
-                result_set.append(lga.as_dict())
-            return result_set
+        _state_ = State.find_by_name_or_code(state_name_or_code)
+        return [ lga.as_dict() for lga in LGA.Query.filter(state=_state_) ]
 
     @staticmethod
     def get_all_cities(state_name_or_code):
-        if len(state_name_or_code) == 2:
-            code = state_name_or_code.upper()
-            result_set = []
-            state_result = State.Query.get(state_code=code)
-            lgas = LGA.Query.filter(state=state_result, city=True)
-            for lga in lgas:
-                result_set.append(lga.as_dict())
-            return result_set
-        elif len(state_name_or_code) > 2:
-            state_name = state_name_or_code.capitalize()
-            result_set = []
-            state_result = State.Query.get(name=state_name)
-            lgas = LGA.Query.filter(state=state_result, city=True)
-            for lga in lgas:
-                result_set.append(lga.as_dict())
-            return result_set
+        return LGA.find_state_cities(state_name_or_code)
