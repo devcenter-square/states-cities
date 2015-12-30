@@ -29,7 +29,7 @@ class State(Object):
             state = State.Query.get(state_code=code)
             return state.as_dict()
         elif len(state_name_or_code) > 2:
-            state_name = state_name_or_code.capitalize()
+            state_name = state_name_or_code.title()
             state = State.Query.get(name=state_name)
             return state.as_dict()
 
