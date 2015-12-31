@@ -16,12 +16,6 @@ class State(Object):
 
     @classmethod
     def find_by_name_or_code(cls,state_name_or_code):
-        """
-            While this is good. This doesnt make it easy for code maintenance.
-            We could rather break this down into find_by_name and a find_by_code method that.
-            This would mean breaking changes to the api as it would mean searches can be done using either name
-            or state_code. This would mean our api is more consistent.
-        """
         if len(state_name_or_code) == 2:
             state = State.Query.get(state_code=state_name_or_code.upper())
         elif len(state_name_or_code) > 2:
