@@ -1,4 +1,6 @@
 from parse_rest.datatypes import Object
+from parse_rest.query import QueryResourceDoesNotExist
+from app.mod_endpoints.exceptions import InvalidAPIUsage
 
 class State(Object):
     def as_dict(self):
@@ -16,11 +18,14 @@ class State(Object):
 
     @classmethod
     def find_by_name_or_code(cls,state_name_or_code):
-        if len(state_name_or_code) == 2:
-            state = State.Query.get(state_code=state_name_or_code.upper())
-        elif len(state_name_or_code) > 2:
-            state = State.Query.get(name=state_name_or_code.title())
-        return state
+        try:
+            if len(state_name_or_code) == 2:
+                state = State.Query.get(state_code=state_name_or_code.upper())
+            elif len(state_name_or_code) > 2:
+                state = State.Query.get(name=state_name_or_code.title())
+            return state
+        except QueryResourceDoesNotExist, e:
+            raise InvalidAPIUsage("State with state name or code '{}' does not exist".format(state_name_or_code), status_code=404)
 
     @staticmethod
     def get_all_states():
@@ -60,3 +65,4 @@ class LGA(Object):
     @staticmethod
     def get_all_cities(state_name_or_code):
         return LGA.find_state_cities(state_name_or_code)
+
