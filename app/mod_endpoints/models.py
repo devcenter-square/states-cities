@@ -9,10 +9,10 @@ class State(Object):
             'capital': self.cap_city,
             'latitude': self.latitude,
             'longitude': self.longitude,
-            'min-lat': self.min_latitude,
-            'min-long': self.min_longitude,
-            'max-lat': self.max_latitude,
-            'max-long': self.max_longitude
+            'minLat': self.min_latitude,
+            'minLong': self.min_longitude,
+            'maxLat': self.max_latitude,
+            'maxLong': self.max_longitude
         }
 
 
