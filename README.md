@@ -41,10 +41,10 @@ name | The name of the state.
 capital | The capital of the state.
 latitude | It's longitude.
 longitude | It's latitude.
-min-lat | The minimum latitude of it's boundary.
-min-long | The minimum longitude of it's boundary.
-max-lat | The maximum latitude of it's boundary.
-max-long | The maximum longitude of it's boundary.
+minLat | The minimum latitude of it's boundary.
+minLong | The minimum longitude of it's boundary.
+maxLat | The maximum latitude of it's boundary.
+maxLong | The maximum longitude of it's boundary.
 
 
 
@@ -53,11 +53,11 @@ For example, a state: http://states-cities.devcenter.co/api/v1/state/lagos
 ```json
 {
   "name": "Lagos",
-  "max-lat": 6.7027984,
-  "min-long": 3.0982732,
+  "maxLat": 6.7027984,
+  "minLong": 3.0982732,
   "longitude": 3.3792057,
-  "max-long": 3.696727799999999,
-  "min-lat": 6.3936419,
+  "maxLong": 3.696727799999999,
+  "minLat": 6.3936419,
   "latitude": 6.5243793,
   "capital": "Ikeja"
 }
