@@ -19,9 +19,9 @@ More on getting the information directly from Parse below.
 URI and Versioning.
 -------------
 
-The API is based at http://states-cities.devcenter.co
+The API is based at http://states-cities.square-api.com
 
-We hope to improve it over time, and these changes won't always be backward compatible, so we're going to version the API. This first iteration will be live at http://states-cities.devcenter.co/api/v1/ and is structured as described below.
+We hope to improve it over time, and these changes won't always be backward compatible, so we're going to version the API. This first iteration will be live at http://states-cities.square-api.com/v1/ and is structured as described below.
 
 
 ----------
@@ -29,9 +29,9 @@ We hope to improve it over time, and these changes won't always be backward comp
 
 ## States
 
-States are identified using their names or a code, which are unique, and live under [http://states-cities.devcenter.co/api/v1/state/**<state_name_or_code>**](http://states-cities.devcenter.co/api/v1/state/<state_name_or_code>).
+States are identified using their names or a code, which are unique, and live under [http://states-cities.square-api.com/v1/state/**<state_name_or_code>**](http://states-cities.square-api.com/v1/state/<state_name_or_code>).
 
-To get a list of all states in Nigeria, call the endpoint at http://states-cities.devcenter.co/api/v1/states.
+To get a list of all states in Nigeria, call the endpoint at http://states-cities.square-api.com/v1/states.
 
 All states have the following properties:
 
@@ -48,7 +48,7 @@ maxLong | The maximum longitude of it's boundary.
 
 
 
-For example, a state: http://states-cities.devcenter.co/api/v1/state/lagos
+For example, a state: http://states-cities.square-api.com/v1/state/lagos
 
 ```json
 {
@@ -67,7 +67,7 @@ For example, a state: http://states-cities.devcenter.co/api/v1/state/lagos
 
 ## Local Government Areas (LGAs)
 
-LGAs belong to a state and they are identified by their names. They live under [http://states-cities.devcenter.co/api/v1/state/**<state_name_or_code>**/lgas](http://states-cities.devcenter.co/api/v1/state/<state_name_or_code>/lgas).
+LGAs belong to a state and they are identified by their names. They live under [http://states-cities.square-api.com/v1/state/**<state_name_or_code>**/lgas](http://states-cities.square-api.com/v1/state/<state_name_or_code>/lgas).
 
 All LGAs have the following properties:
 
@@ -75,7 +75,7 @@ Field | Description
 ------|------------
 name | The name of the LGA.
 
-For example, LGAs in Kaduna: http://states-cities.devcenter.co/api/v1/state/kaduna/lgas
+For example, LGAs in Kaduna: http://states-cities.square-api.com/v1/state/kaduna/lgas
 
 ```json
 [
@@ -155,7 +155,7 @@ For example, LGAs in Kaduna: http://states-cities.devcenter.co/api/v1/state/kadu
 
 ## Cities
 
-Cities belong to a state and they are identified by their names. They live under [http://states-cities.devcenter.co/api/v1/state/**<state_name_or_code>**/cities](http://states-cities.devcenter.co/api/v1/state/<state_name_or_code>/cities).
+Cities belong to a state and they are identified by their names. They live under [http://states-cities.square-api.com/v1/state/**<state_name_or_code>**/cities](http://states-cities.square-api.com/v1/state/<state_name_or_code>/cities).
 
 All cities have the following properties:
 
@@ -163,7 +163,7 @@ Field | Description
 ------|------------
 name | The name of the city.
 
-For example, Cities in Ogun: http://states-cities.devcenter.co/api/v1/state/ogun/cities
+For example, Cities in Ogun: http://states-cities.square-api.com/v1/state/ogun/cities
 
 ```json
 [
