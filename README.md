@@ -19,17 +19,13 @@ More on getting the information directly from Parse below.
 URI and Versioning.
 -------------
 
-The API is based at http://states-cities.square-api.com
-
-We hope to improve it over time, and these changes won't always be backward compatible, so we're going to version the API. This first iteration will be live at http://states-and-cities.com/api/v1/ and is structured as described below.
+We hope to improve this API over time, and these changes won't always be backward compatible, so we're going to version the API. This first iteration will be live at states-and-cities.com/api/v1/ and is structured as described below.
 
 
 ----------
 
 
 ## States
-
-States are identified using their names or a code, which are unique, and live under [http://states-and-cities.com/api/v1/state/**<state_name_or_code>**](http://states-and-cities.com/api/v1/state/<state_name_or_code>).
 
 To get a list of all states in Nigeria, call the endpoint at http://states-and-cities.com/api/v1/states.
 
@@ -47,7 +43,7 @@ maxLat | The maximum latitude of it's boundary.
 maxLong | The maximum longitude of it's boundary.
 
 
-
+States are identified using their names or a code, which are unique.
 For example, a state: http://states-and-cities.com/api/v1/state/lagos
 
 ```json
@@ -67,8 +63,7 @@ For example, a state: http://states-and-cities.com/api/v1/state/lagos
 
 ## Local Government Areas (LGAs)
 
-LGAs belong to a state and they are identified by their names. They live under [http://states-and-cities.com/api/v1/state/**<state_name_or_code>**/lgas](http://states-and-cities.com/api/v1/state/<state_name_or_code>/lgas).
-
+LGAs belong to a state and they are identified by their names. 
 All LGAs have the following properties:
 
 Field | Description
@@ -155,8 +150,7 @@ For example, LGAs in Kaduna: http://states-and-cities.com/api/v1/state/kaduna/lg
 
 ## Cities
 
-Cities belong to a state and they are identified by their names. They live under [http://states-and-cities.com/api/v1/state/**<state_name_or_code>**/cities](http://states-and-cities.com/api/v1/state/<state_name_or_code>/cities).
-
+Cities belong to a state and they are identified by their names.
 All cities have the following properties:
 
 Field | Description
