@@ -17,9 +17,9 @@ app/
 tests/
   test_api.py              # API endpoint tests (pytest)
 run.py                     # Local dev server (0.0.0.0:8080)
-passenger_wsgi.py          # WSGI entry point for production (Passenger)
-Procfile                   # Railway/Heroku deployment (gunicorn)
-requirements.txt           # Pinned Python 3 dependencies
+Procfile                   # Production deployment (gunicorn on Railway)
+requirements.txt           # Production dependencies
+requirements-dev.txt       # Dev dependencies (includes pytest)
 ```
 
 ## API Endpoints
@@ -48,5 +48,6 @@ python run.py
 ## Running Tests
 
 ```bash
+pip install -r requirements-dev.txt
 pytest tests/ -v
 ```
