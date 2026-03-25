@@ -1,6 +1,8 @@
 from flask import Flask, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 from app.mod_endpoints.controllers import mod_endpoints as endpoints_module
 from app.mod_endpoints.exceptions import InvalidAPIUsage
