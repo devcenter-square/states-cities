@@ -6,6 +6,19 @@ from app.mod_endpoints.models import LGA
 mod_endpoints = Blueprint('api/v1', __name__, url_prefix='/api/v1')
 
 
+@mod_endpoints.route('/', methods=['GET'])
+def index():
+    return jsonify({
+        'message': 'States & Cities API',
+        'endpoints': {
+            'states': '/api/v1/states',
+            'state': '/api/v1/state/<name_or_code>',
+            'lgas': '/api/v1/state/<name_or_code>/lgas',
+            'cities': '/api/v1/state/<name_or_code>/cities',
+        }
+    })
+
+
 @mod_endpoints.route('/states', methods=['GET'])
 def get_states():
     return jsonify(State.get_all_states())

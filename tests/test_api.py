@@ -16,7 +16,7 @@ def get_json(response):
 
 class TestIndex:
     def test_root_returns_endpoints(self, client):
-        resp = client.get('/')
+        resp = client.get('/api/v1/')
         assert resp.status_code == 200
         data = get_json(resp)
         assert 'endpoints' in data
