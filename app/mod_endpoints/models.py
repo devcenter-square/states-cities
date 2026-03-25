@@ -1,58 +1,58 @@
-from parse_rest.datatypes import Object
-from parse_rest.query import QueryResourceDoesNotExist
+import json
+import os
 from app.mod_endpoints.exceptions import InvalidAPIUsage
 
-class State(Object):
-    def as_dict(self):
+_data_path = os.path.join(os.path.dirname(__file__), '..', 'data', 'states.json')
+with open(_data_path) as f:
+    _states = json.load(f)
+
+# Build lookup indexes
+_by_name = {s['name'].lower(): s for s in _states}
+_by_code = {s['code'].upper(): s for s in _states}
+
+
+class State:
+    @staticmethod
+    def _as_dict(s):
         return {
-            'name': self.name,
-            'capital': self.cap_city,
-            'latitude': self.latitude,
-            'longitude': self.longitude,
-            'minLat': self.min_latitude,
-            'minLong': self.min_longitude,
-            'maxLat': self.max_latitude,
-            'maxLong': self.max_longitude
+            'name': s['name'],
+            'capital': s['capital'],
+            'latitude': s['latitude'],
+            'longitude': s['longitude'],
         }
 
-
     @classmethod
-    def find_by_name_or_code(cls,state_name_or_code):
-        try:
-            if len(state_name_or_code) == 2:
-                state = State.Query.get(state_code=state_name_or_code.upper())
-            elif len(state_name_or_code) > 2:
-                state = State.Query.get(name=state_name_or_code.title())
-            return state
-        except QueryResourceDoesNotExist as e:
-            raise InvalidAPIUsage("State with state name or code '{}' does not exist".format(state_name_or_code), status_code=404)
+    def find_by_name_or_code(cls, state_name_or_code):
+        key = state_name_or_code.strip()
+        if len(key) == 2:
+            state = _by_code.get(key.upper())
+        else:
+            state = _by_name.get(key.lower())
+        if state is None:
+            raise InvalidAPIUsage(
+                "State with state name or code '{}' does not exist".format(state_name_or_code),
+                status_code=404
+            )
+        return state
 
     @staticmethod
     def get_all_states():
-        return [ state.as_dict() for state in State.Query.all() ]
+        return [State._as_dict(s) for s in _states]
 
     @staticmethod
     def get_one_state(state_name_or_code):
-        _state_ = State.find_by_name_or_code(state_name_or_code)
-        return _state_.as_dict()
+        return State._as_dict(State.find_by_name_or_code(state_name_or_code))
 
-class LGA(Object):
-    def as_dict(self):
-        return {
-            'name': self.name
-        }
 
-    @classmethod
-    def find_state_cities(cls,state_name_or_code):
-        _state_ = State.find_by_name_or_code(state_name_or_code)
-        return [ lga.as_dict() for lga in LGA.Query.filter( state=_state_, city=True ) ]
-
+class LGA:
     @staticmethod
     def get_all_lgas(state_name_or_code):
-        _state_ = State.find_by_name_or_code(state_name_or_code)
-        return [ lga.as_dict() for lga in LGA.Query.filter(state=_state_) ]
+        state = State.find_by_name_or_code(state_name_or_code)
+        return [{'name': lga} for lga in state['lgas']]
 
     @staticmethod
     def get_all_cities(state_name_or_code):
-        return LGA.find_state_cities(state_name_or_code)
-
+        # City data was lost when Parse.com shut down.
+        # Validate the state exists, then return empty list.
+        State.find_by_name_or_code(state_name_or_code)
+        return []
