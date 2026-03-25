@@ -52,7 +52,5 @@ class LGA:
 
     @staticmethod
     def get_all_cities(state_name_or_code):
-        # City data was lost when Parse.com shut down.
-        # Validate the state exists, then return empty list.
-        State.find_by_name_or_code(state_name_or_code)
-        return []
+        state = State.find_by_name_or_code(state_name_or_code)
+        return [{'name': city} for city in state.get('cities', [])]
