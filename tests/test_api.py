@@ -14,6 +14,14 @@ def get_json(response):
     return json.loads(response.data)
 
 
+class TestIndex:
+    def test_root_returns_endpoints(self, client):
+        resp = client.get('/')
+        assert resp.status_code == 200
+        data = get_json(resp)
+        assert 'endpoints' in data
+
+
 class TestGetStates:
     def test_returns_all_states(self, client):
         resp = client.get('/api/v1/states')
