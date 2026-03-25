@@ -35,8 +35,8 @@ Field | Description
 ------|------------
 name | The name of the state.
 capital | The capital of the state.
-latitude | It's longitude.
-longitude | It's latitude.
+latitude | The latitude of the state.
+longitude | The longitude of the state.
 minLat | The minimum latitude of it's boundary.
 minLong | The minimum longitude of it's boundary.
 maxLat | The maximum latitude of it's boundary.
