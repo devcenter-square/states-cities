@@ -12,8 +12,7 @@ About.
 
 It just a simple API that lets you get a list of states, cities and local government areas in Nigeria. In JSON duh. It's made for the developer who wants to make a simple drop down list of Nigerian locations for any app in any language. (It's also not limited to that developer's use case).
 
-It's built in Python with Flask using Parse as a data store.
-More on getting the information directly from Parse below.
+It's built in Python with Flask using a local JSON dataset.
 
 
 URI and Versioning.
@@ -37,10 +36,6 @@ name | The name of the state.
 capital | The capital of the state.
 latitude | The latitude of the state.
 longitude | The longitude of the state.
-minLat | The minimum latitude of it's boundary.
-minLong | The minimum longitude of it's boundary.
-maxLat | The maximum latitude of it's boundary.
-maxLong | The maximum longitude of it's boundary.
 
 
 States are identified using their names or a code, which are unique.
@@ -49,13 +44,9 @@ For example, a state: http://states-and-cities.com/api/v1/state/lagos
 ```json
 {
   "name": "Lagos",
-  "maxLat": 6.7027984,
-  "minLong": 3.0982732,
-  "longitude": 3.3792057,
-  "maxLong": 3.696727799999999,
-  "minLat": 6.3936419,
-  "latitude": 6.5243793,
-  "capital": "Ikeja"
+  "capital": "Ikeja",
+  "latitude": 6.5269033,
+  "longitude": 3.5774005
 }
 ```
 
@@ -157,18 +148,7 @@ Field | Description
 ------|------------
 name | The name of the city.
 
-For example, Cities in Ogun:http://states-and-cities.com/api/v1/state/ogun/cities
-
-```json
-[
-  {
-    "name": "Ijebu Ode"
-  },
-  {
-    "name": "Shagamu"
-  }
-]
-```
+> **Note:** City data is not currently available. The `/cities` endpoint returns an empty list. This data was previously stored in Parse.com, which shut down in 2017.
 
 
 List of endpoints
@@ -179,18 +159,6 @@ This is just a summary of all four endpoints you can call.
 - `GET /state/<state_name_or_code>` returns one state. You can either pass in the state name i.e `lagos` or the state code i.e `LA`.
 - `GET /state/<state_name_or_code>/lgas` returns a list of LGAs in a state. You can either pass in the state name i.e `lagos` or the state code i.e `LA`.
 - `GET /state/<state_name_or_code>/cities` returns a list of cities in a state. You can either pass in the state name i.e `lagos` or the state code i.e `LA`.
-
-
-Using Parse SDKs
---------------------
-
-Since this is a Parse backed application, you can skip the API, if say, you're already using Parse in your application or you'd just rather use Parse's SDK than the API.
-
-You can find the parse keys in `/app/__init__.py` and can use them to only read data. Attempting to write anything to our db is a declaration of eternal war with the Knights of Devcenter Square.
-
-There are two classes of concern if you're using any of the Parse SDKs.
-- `State` there are 36 of them...actually, no 37 of them. LOL. Do with them you what you may.
-- `LGA` These are the local government areas. A city is just a local government area with `city = true`.
 
 
 Contributing
