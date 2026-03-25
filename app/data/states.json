@@ -2,7 +2,7 @@
   {
     "code": "FC",
     "name": "Abuja",
-    "capital": "",
+    "capital": "Abuja",
     "latitude": 8.8311228,
     "longitude": 7.1724673,
     "lgas": ["Abuja", "Kwali", "Kuje", "Gwagwalada", "Bwari", "Abaji"]
@@ -197,7 +197,7 @@
     "capital": "Ikeja",
     "latitude": 6.5269033,
     "longitude": 3.5774005,
-    "lgas": ["Agege", "Ajeromi-Ifelodun", "Alimosho", "Amuwo-Odofin", "Apapa", "Badagry", "Epe", "Eti-Osa", "Ibeju-Lekki", "Ifako-Ijaiye", "Ikeja", "Ikorodu", "Kosofe", "Lagos-Island", "Lagos-Mainland", "Mushin", "Ojo", "Oshodi-Isolo", "Shomolu", "Surulere", "Yewa-South"]
+    "lgas": ["Agege", "Ajeromi-Ifelodun", "Alimosho", "Amuwo-Odofin", "Apapa", "Badagry", "Epe", "Eti-Osa", "Ibeju-Lekki", "Ifako-Ijaiye", "Ikeja", "Ikorodu", "Kosofe", "Lagos-Island", "Lagos-Mainland", "Mushin", "Ojo", "Oshodi-Isolo", "Shomolu", "Surulere"]
   },
   {
     "code": "NA",
