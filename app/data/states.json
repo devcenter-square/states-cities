@@ -221,7 +221,7 @@
     "capital": "Abeokuta",
     "latitude": 6.9788582,
     "longitude": 3.4389293,
-    "lgas": ["Abeokuta-North", "Abeokuta-South", "Ado-Odo Ota", "Ewekoro", "Ifo", "Ijebu-East", "Ijebu-North", "Ijebu-North-East", "Ijebu-Ode", "Ikenne", "Imeko-Afon", "Ipokia", "Obafemi-Owode", "Odeda", "Odogbolu", "Ogun-Waterside", "Remo-North", "Shagamu", "Yewa North"]
+    "lgas": ["Abeokuta-North", "Abeokuta-South", "Ado-Odo Ota", "Ewekoro", "Ifo", "Ijebu-East", "Ijebu-North", "Ijebu-North-East", "Ijebu-Ode", "Ikenne", "Imeko-Afon", "Ipokia", "Obafemi-Owode", "Odeda", "Odogbolu", "Ogun-Waterside", "Remo-North", "Shagamu", "Yewa North", "Yewa South"]
   },
   {
     "code": "ON",
