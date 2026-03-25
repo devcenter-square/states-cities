@@ -18,7 +18,7 @@ It's built in Python with Flask using a local JSON dataset.
 URI and Versioning.
 -------------
 
-We hope to improve this API over time, and these changes won't always be backward compatible, so we're going to version the API. This first iteration will be live at states-and-cities.com/api/v1/ and is structured as described below.
+We hope to improve this API over time, and these changes won't always be backward compatible, so we're going to version the API. This first iteration will be live at overflowing-strength-production.up.railway.app/api/v1/ and is structured as described below.
 
 
 ----------
@@ -26,7 +26,7 @@ We hope to improve this API over time, and these changes won't always be backwar
 
 ## States
 
-To get a list of all states in Nigeria, call the endpoint at http://states-and-cities.com/api/v1/states.
+To get a list of all states in Nigeria, call the endpoint at https://overflowing-strength-production.up.railway.app/api/v1/states.
 
 All states have the following properties:
 
@@ -39,7 +39,7 @@ longitude | The longitude of the state.
 
 
 States are identified using their names or a code, which are unique.
-For example, a state: http://states-and-cities.com/api/v1/state/lagos
+For example, a state: https://overflowing-strength-production.up.railway.app/api/v1/state/lagos
 
 ```json
 {
@@ -54,14 +54,14 @@ For example, a state: http://states-and-cities.com/api/v1/state/lagos
 
 ## Local Government Areas (LGAs)
 
-LGAs belong to a state and they are identified by their names. 
+LGAs belong to a state and they are identified by their names.
 All LGAs have the following properties:
 
 Field | Description
 ------|------------
 name | The name of the LGA.
 
-For example, LGAs in Kaduna: http://states-and-cities.com/api/v1/state/kaduna/lgas
+For example, LGAs in Kaduna: https://overflowing-strength-production.up.railway.app/api/v1/state/kaduna/lgas
 
 ```json
 [
@@ -169,4 +169,3 @@ We welcome any and all contributions, code cleanups and feature requests.
 1. Check for open issues or open a fresh issue to start a discussion around a feature idea or a bug.
 2. Fork the repository on GitHub to start making your changes to the **master** branch (or branch off of it).
 3. Send a pull request and bug the maintainer until it gets merged and published. :).
-
