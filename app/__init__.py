@@ -1,3 +1,4 @@
+import os
 from flask import Flask, jsonify
 from parse_rest.connection import register
 
@@ -10,7 +11,7 @@ from app.mod_endpoints.exceptions import InvalidAPIUsage
 app.register_blueprint(endpoints_module)
 
 #connect to Parse
-register('azP8OG6mI6hw4OQC4hl5La5B2me8b2yk67qTTJVl', 'PWT4hbPVtZ59MU73OfIxjhpCVIkqXYOOb4LY8ars')
+register(os.environ['PARSE_APPLICATION_ID'], os.environ['PARSE_REST_API_KEY'])
 
 @app.errorhandler(InvalidAPIUsage)
 def handle_invalid_usage(error):
