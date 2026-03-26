@@ -40,6 +40,11 @@ class State:
         return [State._as_dict(s) for s in _states]
 
     @staticmethod
+    def search_states(query):
+        q = query.lower()
+        return [State._as_dict(s) for s in _states if q in s['name'].lower()]
+
+    @staticmethod
     def get_one_state(state_name_or_code):
         return State._as_dict(State.find_by_name_or_code(state_name_or_code))
 
@@ -49,6 +54,18 @@ class LGA:
     def get_all_lgas(state_name_or_code):
         state = State.find_by_name_or_code(state_name_or_code)
         return [{'name': lga} for lga in state['lgas']]
+
+    @staticmethod
+    def get_one_lga(state_name_or_code, lga_name):
+        state = State.find_by_name_or_code(state_name_or_code)
+        target = lga_name.strip().lower()
+        for lga in state['lgas']:
+            if lga.lower() == target:
+                return {'name': lga}
+        raise InvalidAPIUsage(
+            "LGA '{}' not found in {}".format(lga_name, state['name']),
+            status_code=404
+        )
 
     @staticmethod
     def get_all_cities(state_name_or_code):
