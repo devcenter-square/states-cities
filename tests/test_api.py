@@ -148,6 +148,14 @@ class TestCacheHeaders:
         assert 'public' in resp.headers.get('Cache-Control', '')
         assert 'max-age=86400' in resp.headers.get('Cache-Control', '')
 
+    def test_no_cache_on_404(self, client):
+        resp = client.get('/api/v1/state/nonexistent')
+        assert 'max-age=86400' not in resp.headers.get('Cache-Control', '')
+
+    def test_no_cache_on_search(self, client):
+        resp = client.get('/api/v1/states?q=lag')
+        assert 'max-age=86400' not in resp.headers.get('Cache-Control', '')
+
 
 class TestCORS:
     def test_cors_headers(self, client):

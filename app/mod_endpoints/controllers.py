@@ -8,7 +8,8 @@ mod_endpoints = Blueprint('api/v1', __name__, url_prefix='/api/v1')
 
 @mod_endpoints.after_request
 def add_cache_headers(response):
-    response.headers['Cache-Control'] = 'public, max-age=86400'
+    if response.status_code == 200 and not request.args.get('q'):
+        response.headers['Cache-Control'] = 'public, max-age=86400'
     return response
 
 
@@ -23,7 +24,8 @@ def index():
             'lgas': '/api/v1/state/<name_or_code>/lgas',
             'lga': '/api/v1/state/<name_or_code>/lgas/<lga_name>',
             'cities': '/api/v1/state/<name_or_code>/cities',
-        }
+        },
+        'note': 'Names with spaces must be URL-encoded (e.g. Lagos%20Island).'
     })
 
 
